@@ -1,0 +1,148 @@
+@charset "utf-8";
+/* CSS Document */
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+body {
+    margin-bottom: 60px;
+	background:#fff;
+}
+.footer {
+    bottom: 0;
+    height: 60px;
+    position: absolute;
+    width: 100%;
+	padding:20px;
+}
+.footer p {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	color: #282828;
+	font-size: 14px;
+	text-align:center;
+	margin-bottom:0px;
+}
+#login {
+    margin: auto;
+    padding: 8% 0 0;
+    max-width: 470px;
+}
+.login-logo {
+	text-align:center;
+	padding-bottom:20px;
+}
+.login-form {
+	background:#fff;
+	padding:20px 30px;
+	-webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.3);
+	box-shadow: 0 1px 6px rgba(0,0,0,0.4);
+	border:1px solid #ffde1b;
+}
+#login .form-horizontal .form-group {
+	margin-left:0px;
+	margin-right:0px;
+	margin-bottom:20px;
+}
+#login .form-horizontal .form-control {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	color: #282828;
+	font-size: 16px;
+	height:40px;
+	border:1px solid #ddd;
+	border-radius:0px;
+	box-shadow:none;
+}
+#login .form-horizontal .forgot-pass {
+	text-align:right;
+	padding-top:9px;
+}
+#login .form-horizontal .forgot-pass a {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	color: #282828;
+	font-size: 15px;
+	text-decoration:underline;
+}
+#login .form-horizontal .forgot-pass a:hover {
+	text-decoration:none;
+}
+#login .form-horizontal .sign-btn {
+	text-align:right;
+	padding-right:0px;
+}
+#login .form-horizontal .btn {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	color: #fff;
+	font-size: 16px;
+	text-transform:uppercase;
+	background:#282828;
+	border:none;
+	border-radius:0px;
+	padding:6px 20px;
+}
+#login .form-horizontal .btn:hover {
+	filter: alpha(opacity=90);
+	opacity: .9
+}
+#login .form-horizontal .btn {
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+#login .form-horizontal .btn.cancel {
+	background:#ddd;
+	color:#282828;
+}
+@media (max-width:991px) {
+.login-logo img {
+	max-width:150px;
+}
+#login {
+	max-width:400px;
+}
+#login .form-horizontal .form-control {
+	height:36px;
+	font-size:14px;
+}
+#login .form-horizontal .btn {
+	font-size:16px;
+}
+#login .form-horizontal .sign-btn {
+	padding-left:0px;
+}
+}
+@media (max-width:767px) { 
+.login-logo img {
+	max-width:130px;
+}
+#login {
+	max-width:400px;
+	padding-top:4%;
+	padding-left:15px;
+	padding-right:15px;
+	padding-bottom:20px;
+}
+.login-form {
+	padding:30px 20px;
+}
+#login .form-horizontal .form-control {
+	height:32px;
+	font-size:14px;
+}
+#login .form-horizontal .forgot-pass {
+	padding-left:0px;
+	padding-right:0px;
+}
+#login .form-horizontal .btn {
+	font-size:14px;
+}
+.footer {
+	padding:0px 15px 5px;
+}
+}
