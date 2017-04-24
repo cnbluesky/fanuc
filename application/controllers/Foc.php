@@ -23,6 +23,7 @@ class Foc extends CI_Controller {
     public function foc_request_detail($id) {
         $condition = array('foc_request_id' => $id);
         $data['foc'] = end($this->obj_common->foc_data($condition));
+        //echo "<pre>";print_r($data);exit;
         $this->load->view('foc_request_detail',$data);
         
     }

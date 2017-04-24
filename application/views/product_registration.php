@@ -41,7 +41,7 @@
             <thead>
               <tr>
                 <th>SL No.</th>
-                <th>User ID</th>
+                <th>Product ID</th>
                 <th>Name</th>
                 <th>Product Category</th>
                 <th>Machine Model</th>

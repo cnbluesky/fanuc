@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Product Registration Details</title>
+<title>User Details</title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<link rel="icon" href="assets/images/favicon.ico" />
+<link rel="icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/font-awesome.min.css">
@@ -21,11 +21,11 @@
   <?php $this->load->view('sidebar'); ?>
   <div class="content-wrapper">
     <section class="content-header">
-      <h1>Product Registration Details</h1>
+      <h1>User Details</h1>
       <ol class="breadcrumb">
         <li><a href="#">Home</a></li>
-        <li><a href="<?php echo base_url().'product'?>">Product Registration</a></li>
-        <li class="active">Product Registration Details</li>
+        <li><a href="<?php echo base_url().'user'?>">User</a></li>
+        <li class="active">User Details</li>
       </ol>
     </section>
     <section class="content">
@@ -34,60 +34,78 @@
           <table class="table">
             <tbody>
               <tr>
-                <th>Product Registration ID</th>
-                <td><?php echo $product['product_registration_id'];?></td>
-              </tr>
-              <tr>
                 <th>User ID</th>
-                <td><?php echo $product['user_id'];?></td>
+                <td><?php echo $user['user_id'];?></td>
               </tr>
+              
               <tr>
                 <th>Name</th>
-                <td><?php echo $product['name'];?></td>
+                <td><?php echo $user['name'];?></td>
               </tr>
+              
               <tr>
-                <th>User Name</th>
-                <td><?php echo $product['user_name'];?></td>
+                <th>Designation</th>
+                <td><?php echo $user['designation'];?></td>
+              </tr>
+              
+              <tr>
+                <th>Company Name</th>
+                <td><?php echo $user['company_name'];?></td>
+              </tr>
+              
+              <tr>
+                <th>Company Address</th>
+                <td><?php echo $user['company_address'];?></td>
+              </tr>
+              
+              <tr>
+                <th>Mobile</th>
+                <td><?php echo $user['country_code'].$user['mobile_number'];?></td>
               </tr>
               
               <tr>
                 <th>Email</th>
-                <td><?php echo $product['email_address'];?></td>
+                <td><?php echo $user['email_address'];?></td>
               </tr>
               
               <tr>
-                <th>Phone</th>
-                <td><?php echo $product['country_code'].$product['mobile_number'];?></td>
-              </tr>
-              <tr>
-                <th>Machine Model</th>
-                <td><?php echo $product['machine_model'];?></td>
+                <th>Company CST TNT Number</th>
+                <td><?php echo $user['company_tnt_cst_no'];?></td>
               </tr>
               
               <tr>
-                <th>MTB Maker</th>
-                <td><?php echo $product['mtb_maker'];?></td>
+                <th>Company PAN</th>
+                <td><?php echo $user['company_pan'];?></td>
               </tr>
               
               <tr>
-                <th>Machine Serial Number</th>
-                <td><?php echo $product['machine_serial_number'];?></td>
+                <th>User Type</th>
+                <td><?php echo $user['user_type'];?></td>
               </tr>
               
               <tr>
-                <th>System Model</th>
-                <td><?php echo $product['system_model'];?></td>
+                <th>User Name</th>
+                <td><?php echo $user['user_name'];?></td>
+              </tr>
+              
+              
+              <tr>
+                <th>Country</th>
+                <td><?php echo $user['country_name'];?></td>
               </tr>
               
               <tr>
-                <th>System Serial Number</th>
-                <td><?php echo $product['system_serial_number'];?></td>
+                <th>State</th>
+                <td><?php echo $user['state_name'];?></td>
               </tr>
               
               <tr>
-                <th>Registered Date</th>
-                <td><?php echo date("d-m-Y", strtotime($product['created_date']));?></td>
+                <th>City</th>
+                <td><?php echo $user['city_name'];?></td>
               </tr>
+              
+              
+              
             </tbody>
           </table>
         </div>

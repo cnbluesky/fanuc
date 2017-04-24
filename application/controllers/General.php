@@ -22,6 +22,7 @@ class General extends CI_Controller {
     public function enquiry_details($id) {
         $condition = array('enquiry_id' => $id);
         $data['enquiry'] = end($this->obj_common->enquiry_data($condition));
+        //echo "<pre>";print_r($data);exit;
         $this->load->view('general_enquiry_details', $data);
     }
 

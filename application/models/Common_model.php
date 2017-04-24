@@ -183,7 +183,7 @@ class Common_model extends CI_Model {
     }
 
     function product_data($condition) {
-        $this->db->select('p.*,u.name,c.product_category_name');
+        $this->db->select('p.*,u.name,u.email_address,u.user_name,u.country_code,u.mobile_number,c.product_category_name');
         $this->db->from('fanuc_product_registration p');
         $this->db->join('fanuc_user u', 'u.user_id = p.user_id');
         $this->db->join('fanuc_product_category c', 'p.product_category_id = c.product_category_id');
@@ -205,7 +205,7 @@ class Common_model extends CI_Model {
     }
 
     function foc_data($condition) {
-        $this->db->select('f.*,u.name,c.product_category_name');
+        $this->db->select('f.*,u.name,u.email_address,u.user_name,u.country_code,u.mobile_number,c.product_category_name');
         $this->db->from('fanuc_foc_request f');
         $this->db->join('fanuc_user u', 'u.user_id = f.user_id');
         $this->db->join('fanuc_product_category c', 'f.product_category_id = c.product_category_id');
@@ -327,6 +327,19 @@ class Common_model extends CI_Model {
         $query = $this->db->get();
         $result = $query->result_array();
         return $result;
+    }
+    
+    public function get_user_data($condition)
+    {
+       $this->db->select('u.*,c.country_name,ci.city_name,s.state_name');
+        $this->db->from('fanuc_user u');
+        $this->db->join('fanuc_country c', 'c.country_id = u.country');
+        $this->db->join('fanuc_city ci', 'ci.city_id = u.city');
+        $this->db->join('fanuc_state s', 's.state_id = u.state');
+        $this->db->where($condition);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result; 
     }
 
 }

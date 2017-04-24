@@ -24,6 +24,7 @@ class Product extends CI_Controller {
     public function product_registration_details($id) {
         $condition = array('product_registration_id' => $id);
         $data['product'] = end($this->obj_common->product_data($condition));
+       // echo "<pre>";print_r($data);exit;
         $this->load->view('product_registration_details',$data);
         
         

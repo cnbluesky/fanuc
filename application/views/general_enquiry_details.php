@@ -33,6 +33,10 @@
         <div class="registration-details gen-enquiry-details">
           <table class="table">
             <tbody>
+                <tr>
+                    <th>User ID</th>
+                    <td><?php echo $enquiry['user_id'];?></td>
+                </tr>
               <tr>
                 <th>Problem Details</th>
                 <td><p><?php echo $enquiry['enquiry_details'];?></p></td>

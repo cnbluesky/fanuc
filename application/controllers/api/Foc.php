@@ -9,8 +9,7 @@ class Foc extends CI_Controller {
         $this->load->model('Common_model', 'obj_common', TRUE);
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-        header("Access-Control-Allow-Methods : POST,GET,PUT,DELETE");
-        header("Access-Control-Allow-Headers : Authorization, Lang");
+        
     }
 
     public function index() {
@@ -59,26 +58,26 @@ class Foc extends CI_Controller {
                         $state_data = end($this->obj_common->get_data(array('state_id' => $user_data['state']), 'fanuc_state'));
                         if ($state_data['state_zone'] == 'SZ') {
                             //$this->send_mail('servicesz@fanucindia.com', 'New Foc Registration Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'South Zone', $content);
                         }
 
                         if ($state_data['state_zone'] == 'EZ') {
                             //$this->send_mail('serviceez@fanucindia.com', 'New Foc Registration Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'East Zone', $content);
                         }
 
                         if ($state_data['state_zone'] == 'WZ') {
                             //$this->send_mail('servicewz@fanucindia.com', 'New Foc Registration Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'West Zone', $content);
                         }
 
                         if ($state_data['state_zone'] == 'NZ') {
                             // $this->send_mail('servicenz@fanucindia.com', 'New Foc Registration Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'North Zone', $content);
                         }
                     } else {
                         //$this->send_mail('servicesz@fanucindia.com', 'New Foc Registration Request', $content);
-                        $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
+                        $this->send_mail('maneesh@focaloid.com', 'Other', $content);
                     }
 
                     $ins_arr = array('product_category_id' => $requestjson['product_category_id'], 'mtb_maker' => $requestjson['mtb_maker'],

@@ -33,14 +33,35 @@
         <div class="registration-details">
           <table class="table">
             <tbody>
+              
               <tr>
-                <th>Product Category</th>
-                <td><?php echo $foc['product_category_name'];?></td>
+                <th>User ID</th>
+                <td><?php echo $foc['user_id'];?></td>
+              </tr>
+              
+              <tr>
+                <th>Name</th>
+                <td><?php echo $foc['name'];?></td>
               </tr>
               
               <tr>
                 <th>User Name</th>
-                <td><?php echo $foc['name'];?></td>
+                <td><?php echo $foc['user_name'];?></td>
+              </tr>
+              
+              <tr>
+                <th>Email</th>
+                <td><?php echo $foc['email_address'];?></td>
+              </tr>
+              
+              <tr>
+                <th>Phone</th>
+                <td><?php echo $foc['country_code'].$foc['mobile_number'];?></td>
+              </tr>
+              
+              <tr>
+                <th>Product Category</th>
+                <td><?php echo $foc['product_category_name'];?></td>
               </tr>
               
               <tr>

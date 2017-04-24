@@ -13,8 +13,16 @@ class User extends CI_Controller {
     }
 
     public function index() {
-        $data['user'] = $this->obj_common->get_data(array(), 'fanuc_user');
+        $condition = array();
+        $data['user'] = $this->obj_common->get_user_data($condition);
         $this->load->view('user', $data);
+    }
+
+    public function view_user($id) {
+        $condition = array('user_id' => $id);
+        $data['user'] = end($this->obj_common->get_user_data($condition));
+        //echo "<pre>";print_r($data);exit;
+        $this->load->view('user_details', $data);
     }
 
     public function change_status() {
@@ -55,21 +63,20 @@ class User extends CI_Controller {
             
         } else {
             $this->obj_common->update($condition, array('admin_email' => $this->input->post('admin_email', TRUE)), 'fanuc_admin');
-            redirect(base_url().'user/settings');
+            redirect(base_url() . 'user/settings');
         }
 
         $this->load->view('settings', $data);
     }
-    
-    public function city_status()
-    {
+
+    public function city_status() {
         $state = $this->obj_common->get_states();
-        foreach ($state as $val)
-        {
+        foreach ($state as $val) {
             $data = array('city_status' => '1');
-            $this->obj_common->update(array('state_id' => $val['state_id']),$data,'fanuc_city');
+            $this->obj_common->update(array('state_id' => $val['state_id']), $data, 'fanuc_city');
         }
-        echo "<pre>";print_r($state);
+        echo "<pre>";
+        print_r($state);
     }
 
 }

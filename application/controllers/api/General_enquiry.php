@@ -7,8 +7,9 @@ class General_enquiry extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('Common_model', 'obj_common', TRUE);
-        header('Access-Control-Allow-Origin: *'); 
+        header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+        
     }
 
     public function index() {
@@ -41,27 +42,27 @@ class General_enquiry extends CI_Controller {
                     if ($user_data['country'] == '101') {
                         $state_data = end($this->obj_common->get_data(array('state_id' => $user_data['state']), 'fanuc_state'));
                         if ($state_data['state_zone'] == 'SZ') {
-                            //$this->send_mail('servicesz@fanucindia.com', 'New Enquiry Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Enquiry Request', $content);
+                            //$this->send_mail('servicesz@fanucindia.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'South Zone', $content);
                         }
 
                         if ($state_data['state_zone'] == 'EZ') {
-                            //$this->send_mail('serviceez@fanucindia.com', 'New Enquiry Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Enquiry Request', $content);
+                            //$this->send_mail('serviceez@fanucindia.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'East Zone', $content);
                         }
 
                         if ($state_data['state_zone'] == 'WZ') {
-                            //$this->send_mail('servicewz@fanucindia.com', 'New Enquiry Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Enquiry Request', $content);
+                            //$this->send_mail('servicewz@fanucindia.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'West Zone', $content);
                         }
 
                         if ($state_data['state_zone'] == 'NZ') {
-                           // $this->send_mail('servicenz@fanucindia.com', 'New Enquiry Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Enquiry Request', $content);
+                            // $this->send_mail('servicenz@fanucindia.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'North Zone', $content);
                         }
                     } else {
                         //$this->send_mail('servicesz@fanucindia.com', 'New Foc Registration Request', $content);
-                        $this->send_mail('maneesh@focaloid.com', 'New Enquiry Request', $content);
+                        $this->send_mail('maneesh@focaloid.com', 'Other', $content);
                     }
                 
                 

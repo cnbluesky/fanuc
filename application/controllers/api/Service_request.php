@@ -36,23 +36,24 @@ class Service_request extends CI_Controller {
                 }
                 $service_request_id = "FM" . $service_id;
                 $user_data = end($this->obj_common->get_data(array('user_id' => $requestjson['user_id']), 'fanuc_user'));
-                
-                $content = "
-                <h4>New Service Request #".$service_request_id."</h4>  
-                <table style='width:300px;'>
-                <tr><td>Customer Name</td><td>" . $user_data['name'] . "</td></tr>
-                <tr><td>Company Name</td><td>" . $user_data['company_name'] . "</td></tr>
-                <tr><td>Phone</td><td>" . $user_data['country_code'] .$user_data['mobile_number']. "</td></tr>
-                <tr><td>Email</td><td>" . $user_data['email_address'] . "</td></tr>
-                <tr><td>Machine Model</td><td>" . $requestjson['machine_model'] . "</td></tr>
-                <tr><td>Machine Serial Number</td><td>" . $requestjson['machine_serial_number'] . "</td></tr>
-                <tr><td>System Model</td><td>" . $requestjson['system_model'] . "</td></tr>
-                <tr><td>System Serial Number</td><td>" . $requestjson['system_serial_number'] . "</td></tr>
-                </table>";
+
+
                 //print_r($content);exit;
-                
+
                 if ($requestjson['service_type'] == 'service') {
                     if ($requestjson['product_registered'] == '0') {
+                        $content = "
+                        <h4>New Service Request #" . $service_request_id . "</h4>  
+                        <table style='width:300px;'>
+                        <tr><td>Customer Name</td><td>" . $user_data['name'] . "</td></tr>
+                        <tr><td>Company Name</td><td>" . $user_data['company_name'] . "</td></tr>
+                        <tr><td>Phone</td><td>" . $user_data['country_code'] . $user_data['mobile_number'] . "</td></tr>
+                        <tr><td>Email</td><td>" . $user_data['email_address'] . "</td></tr>
+                        <tr><td>Machine Model</td><td>" . $requestjson['machine_model'] . "</td></tr>
+                        <tr><td>Machine Serial Number</td><td>" . $requestjson['machine_serial_number'] . "</td></tr>
+                        <tr><td>System Model</td><td>" . $requestjson['system_model'] . "</td></tr>
+                        <tr><td>System Serial Number</td><td>" . $requestjson['system_serial_number'] . "</td></tr>
+                        </table>";
                         $install_id = $requestjson['system_serial_number'];
                         $ins_arr = array('product_category_id' => $requestjson['product_category_id'], 'mtb_maker' => $requestjson['mtb_maker'],
                             'machine_model' => $requestjson['machine_model'], 'machine_serial_number' => $requestjson['machine_serial_number'],
@@ -66,63 +67,102 @@ class Service_request extends CI_Controller {
                         $this->obj_common->insert($ins_arr1, 'fanuc_service_request');
                     }
                     if ($requestjson['product_registered'] == '1') {
+                        $pr_data = end($this->obj_common->get_data(array('install_id' => $requestjson['install_id']), 'fanuc_service_request'));
+                        $content = "
+                        <h4>New Service Request #" . $service_request_id . "</h4>  
+                        <table style='width:300px;'>
+                        <tr><td>Customer Name</td><td>" . $user_data['name'] . "</td></tr>
+                        <tr><td>Company Name</td><td>" . $user_data['company_name'] . "</td></tr>
+                        <tr><td>Phone</td><td>" . $user_data['country_code'] . $user_data['mobile_number'] . "</td></tr>
+                        <tr><td>Email</td><td>" . $user_data['email_address'] . "</td></tr>
+                        <tr><td>Machine Model</td><td>" . $pr_data['machine_model'] . "</td></tr>
+                        <tr><td>Machine Serial Number</td><td>" . $pr_data['machine_serial_number'] . "</td></tr>
+                        <tr><td>System Model</td><td>" . $pr_data['system_model'] . "</td></tr>
+                        <tr><td>System Serial Number</td><td>" . $pr_data['system_serial_number'] . "</td></tr>
+                        </table>";
                         $ins_arr1 = array('user_id' => $requestjson['user_id'], 'service_type' => $requestjson['service_type'],
                             'product_category_id' => $requestjson['product_category_id'], 'install_id' => $requestjson['install_id'], 'problem_details' => $requestjson['problem_details'],
-                            'created_date' => date('Y-m-d H:i:s'),'request_status' => '0','service_request_number' => $service_request_id);
+                            'created_date' => date('Y-m-d H:i:s'), 'request_status' => '0', 'service_request_number' => $service_request_id);
                         $this->obj_common->insert($ins_arr1, 'fanuc_service_request');
                     }
-                    
+
                     if ($user_data['country'] == '101') {
                         $state_data = end($this->obj_common->get_data(array('state_id' => $user_data['state']), 'fanuc_state'));
                         if ($state_data['state_zone'] == 'SZ') {
-                            //$this->send_mail('servicesz@fanucindia.com', 'New Service Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
+                            //$this->send_mail('servicesz@fanucindia.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'South Zone', $content);
                         }
 
                         if ($state_data['state_zone'] == 'EZ') {
-                            //$this->send_mail('serviceez@fanucindia.com', 'New Service Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
+                            //$this->send_mail('serviceez@fanucindia.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'East Zone', $content);
                         }
 
                         if ($state_data['state_zone'] == 'WZ') {
-                            //$this->send_mail('servicewz@fanucindia.com', 'New Service Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
+                            //$this->send_mail('servicewz@fanucindia.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'West Zone', $content);
                         }
 
                         if ($state_data['state_zone'] == 'NZ') {
-                           // $this->send_mail('servicenz@fanucindia.com', 'New Service Request', $content);
-                            $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
+                            // $this->send_mail('servicenz@fanucindia.com', 'New Foc Registration Request', $content);
+                            $this->send_mail('maneesh@focaloid.com', 'North Zone', $content);
                         }
                     } else {
-                        //$this->send_mail('servicesz@fanucindia.com', 'New Service Request', $content);
-                        $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
+                        //$this->send_mail('servicesz@fanucindia.com', 'New Foc Registration Request', $content);
+                        $this->send_mail('maneesh@focaloid.com', 'Other', $content);
                     }
+                    
                 }
 
 
-                if ($requestjson['service_type'] == 'spare_part') {
-                    $ins_arr2 = array('user_id' => $requestjson['user_id'], 'service_type' => $requestjson['service_type'],
-                        'problem_details' => $requestjson['problem_details'], 'created_date' => date('Y-m-d H:i:s'),
-                        'product_category_id' => '', 'install_id' => '','request_status' => '0','service_request_number' => $service_request_id);
-                    $this->obj_common->insert($ins_arr2, 'fanuc_service_request');
-                   // $this->send_mail('spareparts@fanucindia.com', 'New Service Request', $content);
-                    $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
-                }
+                    if ($requestjson['service_type'] == 'spare_part') {
+                        $content = "
+                        <h4>New Spare Part Request #" . $service_request_id . "</h4>  
+                        <table style='width:300px;'>
+                        <tr><td>Customer Name</td><td>" . $user_data['name'] . "</td></tr>
+                        <tr><td>Company Name</td><td>" . $user_data['company_name'] . "</td></tr>
+                        <tr><td>Phone</td><td>" . $user_data['country_code'] . $user_data['mobile_number'] . "</td></tr>
+                        <tr><td>Email</td><td>" . $user_data['email_address'] . "</td></tr>
+                        <tr><td>Problem Details</td><td>" . $requestjson['problem_details'] . "</td></tr>
+                        
+                        </table>";
+                        
+                        $ins_arr2 = array('user_id' => $requestjson['user_id'], 'service_type' => $requestjson['service_type'],
+                            'problem_details' => $requestjson['problem_details'], 'created_date' => date('Y-m-d H:i:s'),
+                            'product_category_id' => '', 'install_id' => '', 'request_status' => '0', 'service_request_number' => $service_request_id);
+                        $this->obj_common->insert($ins_arr2, 'fanuc_service_request');
+                        // $this->send_mail('spareparts@fanucindia.com', 'New Service Request', $content);
+                        $this->send_mail('maneesh@focaloid.com', 'Spare Part', $content);
+                         
+                    }
 
-                if ($requestjson['service_type'] == 'repair') {
-                    $ins_arr3 = array('user_id' => $requestjson['user_id'], 'service_type' => $requestjson['service_type'],
-                        'problem_details' => $requestjson['problem_details'], 'created_date' => date('Y-m-d H:i:s'),
-                        'product_category_id' => '', 'install_id' => '','request_status' => '0','service_request_number' => $service_request_id);
-                    $this->obj_common->insert($ins_arr3, 'fanuc_service_request');
-                    //$this->send_mail('repairs@fanucindia.com', 'New Service Request', $content);
-                    $this->send_mail('maneesh@focaloid.com', 'New Foc Registration Request', $content);
-                }
+                    if ($requestjson['service_type'] == 'repair') {
+                        $content = "
+                        <h4>New Repair Request #" . $service_request_id . "</h4>  
+                        <table style='width:300px;'>
+                        <tr><td>Customer Name</td><td>" . $user_data['name'] . "</td></tr>
+                        <tr><td>Company Name</td><td>" . $user_data['company_name'] . "</td></tr>
+                        <tr><td>Phone</td><td>" . $user_data['country_code'] . $user_data['mobile_number'] . "</td></tr>
+                        <tr><td>Email</td><td>" . $user_data['email_address'] . "</td></tr>
+                        <tr><td>Problem Details</td><td>" . $requestjson['problem_details'] . "</td></tr>
+                        
+                        </table>";
+                        
+                        $ins_arr3 = array('user_id' => $requestjson['user_id'], 'service_type' => $requestjson['service_type'],
+                            'problem_details' => $requestjson['problem_details'], 'created_date' => date('Y-m-d H:i:s'),
+                            'product_category_id' => '', 'install_id' => '', 'request_status' => '0', 'service_request_number' => $service_request_id);
+                        $this->obj_common->insert($ins_arr3, 'fanuc_service_request');
+                        //$this->send_mail('repairs@fanucindia.com', 'New Service Request', $content);
+                        $this->send_mail('maneesh@focaloid.com', 'Repair', $content);
+                        
+                    }
 
-                $json['success'] = true;
-                $json['message'] = "Your request has been successfully registered.";
-                $this->send_response($json);
+                    $json['success'] = true;
+                    $json['message'] = "Your request has been successfully registered.";
+                    $this->send_response($json);
+                }
             }
-        } else {
+         else {
 
             $json['success'] = false;
             $json['message'] = "Only Post Method is allowded.";
@@ -205,11 +245,11 @@ class Service_request extends CI_Controller {
                 $json['message'] = "Service request id is required";
                 $this->send_response($json);
             } else {
-                
-                
+
+
                 $condition = array('service_request_id' => $requestjson['service_request_id']);
                 $service_data = end($this->obj_common->get_data($condition, 'fanuc_service_request'));
-                
+
                 $content = "
                 <h4>New Service Request</h4>  
                 <table style='width:300px;'>

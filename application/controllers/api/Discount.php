@@ -9,8 +9,7 @@ class Discount extends CI_Controller {
         $this->load->model('Common_model', 'obj_common', TRUE);
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-        header("Access-Control-Allow-Methods : POST,GET,PUT,DELETE");
-        header("Access-Control-Allow-Headers : Authorization, Lang");
+        
     }
 
     public function index() {

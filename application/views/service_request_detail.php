@@ -35,7 +35,7 @@
             <tbody>
               <tr>
                 <th>Service Request No.</th>
-                <td><?php echo $service['service_request_id'];?></td>
+                <td><?php echo $service['service_request_number'];?></td>
               </tr>
               
               <tr>

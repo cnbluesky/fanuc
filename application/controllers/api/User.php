@@ -9,9 +9,6 @@ class User extends CI_Controller {
         $this->load->model('Common_model', 'obj_common', TRUE);
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-        header("Access-Control-Allow-Methods : POST,GET,PUT,DELETE");
-        header("Access-Control-Allow-Headers : Authorization, Lang");
-        
     }
 
     public function register() {
@@ -56,7 +53,8 @@ class User extends CI_Controller {
                 'password' => md5($requestjson['password']),
                 'otp_status' => '0',
                 'user_otp' => '0',
-                'user_status' => '1'
+                'user_status' => '1',
+                'created_date' => date('Y-m-d H:i:s')
             );
             //$this->obj_common->insert($ins_arr,'fanuc_user');
             $email = end($this->obj_common->get_data(array('email_address' => $requestjson['email_address']), 'fanuc_user'));
@@ -132,33 +130,38 @@ class User extends CI_Controller {
                     $json['message'] = "Invalid username or password.";
                     $this->send_response($json);
                 } else {
+                    if ($user['user_status'] == '1') {
+                        $user_id = $user['user_id'];
+                        $user_status = $user['otp_status'];
+                        $user_details = array(
+                            'user_id' => "$user_id",
+                            'name' => $user['name'],
+                            'designation' => $user['designation'],
+                            'company_name' => $user['company_name'],
+                            'company_address' => $user['company_address'],
+                            'country' => $user['country'],
+                            'state' => $user['state'],
+                            'city' => $user['city'],
+                            'pin_code' => $user['pin_code'],
+                            'mobile_number' => $user['mobile_number'],
+                            'country_code' => $user['country_code'],
+                            'email_address' => $user['email_address'],
+                            'company_tnt_cst_no' => $user['company_tnt_cst_no'],
+                            'company_pan' => $user['company_pan'],
+                            'user_type' => $user['user_type'],
+                            'user_name' => $user['user_name'],
+                            'otp_status' => "$user_status"
+                        );
 
-                    $user_id = $user['user_id'];
-                    $user_status = $user['otp_status'];
-                    $user_details = array(
-                        'user_id' => "$user_id",
-                        'name' => $user['name'],
-                        'designation' => $user['designation'],
-                        'company_name' => $user['company_name'],
-                        'company_address' => $user['company_address'],
-                        'country' => $user['country'],
-                        'state' => $user['state'],
-                        'city' => $user['city'],
-                        'pin_code' => $user['pin_code'],
-                        'mobile_number' => $user['mobile_number'],
-                        'country_code' => $user['country_code'],
-                        'email_address' => $user['email_address'],
-                        'company_tnt_cst_no' => $user['company_tnt_cst_no'],
-                        'company_pan' => $user['company_pan'],
-                        'user_type' => $user['user_type'],
-                        'user_name' => $user['user_name'],
-                        'otp_status' => "$user_status"
-                    );
-
-                    $json['success'] = true;
-                    $json['user'] = $user_details;
-                    $json['message'] = "You Have successfully login";
-                    $this->send_response($json);
+                        $json['success'] = true;
+                        $json['user'] = $user_details;
+                        $json['message'] = "You Have successfully login";
+                        $this->send_response($json);
+                    } else {
+                        $json['success'] = false;
+                        $json['message'] = "Your account is deactivated";
+                        $this->send_response($json);
+                    }
                 }
             }
         } else {

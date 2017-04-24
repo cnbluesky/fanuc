@@ -23,6 +23,7 @@ class Service extends CI_Controller {
     public function service_request_detail($id) {
         $condition = array('service_request_id' => $id);
         $data['service'] = end($this->obj_common->service_data($condition));
+        //echo "<pre>";print_r($data);exit;
         $this->load->view('service_request_detail',$data);
     }
 

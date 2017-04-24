@@ -45,7 +45,7 @@
                                         <th>Mobile</th>
                                         <th>Email</th>
                                         <th>User type</th>
-
+                                        <th>Registered Date</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -57,8 +57,8 @@
                                         ?>
                                         <tr>
                                             <td><?php echo $i; ?></td>
-                                            <td>123</td>
-                                            <td><?php echo $val['user_id']; ?></td>
+                                            <td><a href="<?php echo base_url().'user/view_user/'.$val['user_id']?>"><?php echo $val['user_id']; ?></a></td>
+                                            <td><?php echo $val['user_name']; ?></td>
 
                                             <td><?php echo $val['name']; ?></td>
                                             <td><?php echo $val['designation']; ?></td>
@@ -66,7 +66,7 @@
                                             <td><?php echo $val['mobile_number']; ?></td>
                                             <td><?php echo $val['email_address']; ?></td>
                                             <td><?php echo $val['user_type']; ?></td>
-
+                                            <td><?php echo date("d-m-Y", strtotime($val['created_date']));?></td>
                                             <td>
                                                 <span class="status_change">
                                                     <input type="hidden" value="<?php echo $val['user_id']; ?>" name="user_id" class="user_id" >
